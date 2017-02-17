@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Control Panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="text-center" style="font-size: 2em;">
+            <a href="@Url.Action("Index", "Employee", null)"> <div class="glyphicon glyphicon-user" aria-hidden="true"></div>  <div class="glyphicon-class">Manage Employees</div> </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="text-center" style="font-size: 2em;">
+            <a href="@Url.Action("Index", "Payroll", null)"> <div class="glyphicon glyphicon-usd" aria-hidden="true"></div> <div class="glyphicon-class">Manage Payrolls</div> </a>
+        </div>
+    </div>
+</div>

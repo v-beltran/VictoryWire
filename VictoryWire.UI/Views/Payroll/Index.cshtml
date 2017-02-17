@@ -1,0 +1,58 @@
+﻿@model IEnumerable<VictoryWire.UI.ViewModels.PayrollListViewModel>
+
+@{
+    ViewBag.Title = "View Payrolls";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Payroll", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="form-group">
+        <label class="control-label col-md-2 col-md-offset-6">Week Ending Date</label>
+        <div class="col-md-2">
+            <div class="input-group">
+                <input type="text" name="weekending" class="form-control calendar-datepicker" />
+                <div class="input-group-addon">
+                    <span class="calendar-datepicker">
+                        <em class="glyphicon glyphicon-calendar"></em>
+                    </span>
+                </div>
+            </div>
+            @Html.ValidationMessage("week")
+        </div>
+        <div class="col-md-offset-4">            
+            <input type="submit" value="Add New Payroll" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PayrollId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeekEnding)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayrollId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekEnding)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PayrollId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PayrollId })
+            </td>
+        </tr>
+    }
+
+</table>

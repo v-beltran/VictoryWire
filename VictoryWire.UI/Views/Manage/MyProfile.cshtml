@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@{Html.RenderAction("EditAccountDetails");}
+@{Html.RenderAction("EditCompanyDetails");}
+@{Html.RenderAction("EditCompanyContact");}
+
+<script type="text/javascript">
+    $(function () {
+        $(document).on("change", "#logo-upload", function() {
+            var formData = new FormData();
+            formData.append("logo", $("#logo-upload")[0].files[0]);
+
+            $.ajax({
+                url: '@Url.Action("UploadCompanyLogo", "Manage")',
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (data) {
+                if (typeof data !== "undefined" && data.image.length > 0) {
+                    if ($("#company-logo").length > 0) {
+                        $("#company-logo").attr("src", data.image + "?t" + new Date().getTime());
+                    }
+                    else {
+                        $("#logo-upload").before("<img id='company-logo' width='200' height='200' style='margin-bottom:10px;' src='" + data.image +"' />")
+                    }
+                }
+
+                $("#logo-validation").text("");
+                $("#logo-upload")[0].value = "";
+            }).error(function (data) {
+                $("#logo-validation").text(data.responseJSON.message);
+                $("#logo-upload")[0].value = "";
+            });
+        });
+    });
+
+    function OnComplete(target) {
+        var hasErrors = false;
+        var errors = $(target).find(".text-danger");
+        var success = $(target).find(".text-success").first();
+        errors.each(function () { if ($(this).text().length > 0) { hasErrors = true; return false; } });
+
+        if (!hasErrors) {
+            $(success).text("Information saved successfully.");
+        } else {
+            $(success).text('');
+        }
+    }
+</script>
