@@ -270,9 +270,6 @@
     <Content Include="machineKey.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="appSettings.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\VictoryWire.Shared\VictoryWire.Shared.csproj">
       <Project>{3a2cd125-6fe6-4b78-b541-693bd583b492}</Project>
       <Name>VictoryWire.Shared</Name>
